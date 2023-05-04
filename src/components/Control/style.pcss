@@ -1,0 +1,61 @@
+.control {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &_circle {
+    border-radius: 50%;
+  }
+
+  &_border {
+    border: 1px solid var(--color-default-010);
+    box-sizing: border-box;
+
+    &:active {
+      border: unset;
+    }
+  }
+
+  &_hover {
+    cursor: pointer;
+    transition: background-color var(--default-animation-time) var(--default-animation);
+  }
+
+  &_icon {
+    z-index: 1;
+    transition: fill var(--default-animation-time) var(--default-animation);
+  }
+
+  &_size {
+    &--32 {
+      width: 32px;
+      height: 32px;
+
+      & svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &_skin {
+
+    &--default {
+      & .control_icon {
+        fill: var(--color-default-050);
+      }
+
+      &:hover {
+        background-color: var(--color-default-010);
+      }
+
+      &:active {
+        background-color: var(--color-default-025);
+        & .control_icon {
+          fill: var(--color-default-075);
+        }
+      }
+    }
+  }
+}

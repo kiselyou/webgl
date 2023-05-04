@@ -1,0 +1,129 @@
+.theme {
+  --default-animation-time: 0.15s;
+  --default-animation: cubic-bezier(0, 0.4, 0.6, 1);
+
+  --font-family-default: 'Inter', sans-serif;
+  --font-family-title: 'Manrope', sans-serif;
+
+  // Одинаковые цвета для всех скинок.
+  --fixed-color-white-100: rgba(255, 255, 255, 1.00);
+  --fixed-color-white-075: rgba(255, 255, 255, 0.75);
+  --fixed-color-white-066: rgba(255, 255, 255, 0.66);
+  --fixed-color-white-050: rgba(255, 255, 255, 0.50);
+  --fixed-color-white-025: rgba(255, 255, 255, 0.25);
+  --fixed-color-white-010: rgba(255, 255, 255, 0.10);
+
+  // Одинаковые цвета для всех скинок.
+  --fixed-color-gray-100: rgba(21, 27, 30, 1.00);
+  --fixed-color-gray-095: rgba(21, 27, 30, 0.95);
+  --fixed-color-gray-075: rgba(21, 27, 30, 0.75);
+  --fixed-color-gray-050: rgba(21, 27, 30, 0.50);
+  --fixed-color-gray-025: rgba(21, 27, 30, 0.25);
+  --fixed-color-gray-015: rgba(21, 27, 30, 0.15);
+  --fixed-color-gray-010: rgba(21, 27, 30, 0.10);
+  --fixed-color-gray-005: rgba(21, 27, 30, 0.05);
+
+  --fixed-color-black-010: rgba(0, 0, 0, 0.10);
+  --fixed-color-black-075: rgba(0, 0, 0, 0.75);
+  --fixed-color-black-100: rgba(0, 0, 0, 1.00);
+
+  --fixed-color-blue-100: rgba(30, 136, 229, 1.00);
+  --fixed-color-blue-075: rgba(30, 136, 229, 0.75);
+  --fixed-color-blue-050: rgba(30, 136, 229, 0.50);
+  --fixed-color-blue-025: rgba(30, 136, 229, 0.25);
+  --fixed-color-blue-010: rgba(30, 136, 229, 0.10);
+  --fixed-color-blue-005: rgba(30, 136, 229, 0.05);
+
+  &_init {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--color-default-100);
+    background: var(--color-base-100);
+    font-family: var(--font-family-default);
+    text-align: left;
+  }
+
+  &--light {
+    // Цвет зависит от скинки, число переменной соответствует проценту прозрачности.
+    --color-default-100: rgba(21, 27, 30, 1.00);
+    --color-default-075: rgba(21, 27, 30, 0.75);
+    --color-default-050: rgba(21, 27, 30, 0.50);
+    --color-default-025: rgba(21, 27, 30, 0.25);
+    --color-default-015: rgba(21, 27, 30, 0.15);
+    --color-default-010: rgba(21, 27, 30, 0.10);
+    --color-default-005: rgba(21, 27, 30, 0.05);
+    --color-default-003: rgba(21, 27, 30, 0.03);
+    --color-default-001: rgba(21, 27, 30, 0.01);
+    --color-default-000: rgba(21, 27, 30, 0.00);
+
+    // Цвет зависит от скинки, число переменной соответствует проценту прозрачности.
+    --color-base-100: rgba(255, 255, 255, 1.00);
+    --color-base-075: rgba(255, 255, 255, 0.75);
+    --color-base-050: rgba(255, 255, 255, 0.50);
+    --color-base-025: rgba(255, 255, 255, 0.25);
+    --color-base-015: rgba(255, 255, 255, 0.15);
+    --color-base-010: rgba(255, 255, 255, 0.10);
+    --color-base-005: rgba(255, 255, 255, 0.05);
+    --color-base-003: rgba(255, 255, 255, 0.03);
+    --color-base-000: rgba(255, 255, 255, 0.00);
+
+    // Цвет зависит от скинки
+    --color-hex-01: #E1E2E2;
+    --color-hex-02: #9966CC;
+    --color-hex-03: #1E88E5;
+    --color-hex-04: #4CAF50;
+    --color-hex-05: #FB8C00;
+    --color-hex-06: #E53935;
+
+    --color-inverse-hex-01: #2F373B;
+    --color-inverse-hex-02: #8244C1;
+    --color-inverse-hex-03: #1976D2;
+    --color-inverse-hex-04: #43A047;
+    --color-inverse-hex-05: #F57C00;
+    --color-inverse-hex-06: #D32F2F;
+
+    --shadow-inset-default-025: 0 0 9px inset var(--color-default-025);
+  }
+
+  &--dark {
+    // Цвет зависит от скинки, число переменной соответствует проценту прозрачности.
+    --color-default-100: rgba(255, 255, 255, 1.00);
+    --color-default-075: rgba(255, 255, 255, 0.75);
+    --color-default-050: rgba(255, 255, 255, 0.50);
+    --color-default-025: rgba(255, 255, 255, 0.25);
+    --color-default-015: rgba(255, 255, 255, 0.15);
+    --color-default-010: rgba(255, 255, 255, 0.10);
+    --color-default-005: rgba(255, 255, 255, 0.05);
+    --color-default-003: rgba(255, 255, 255, 0.03);
+    --color-default-001: rgba(255, 255, 255, 0.01);
+    --color-default-000: rgba(255, 255, 255, 0.00);
+
+    // Цвет зависит от скинки, число переменной соответствует проценту прозрачности.
+    --color-base-100: rgba(21, 27, 30, 1.00);
+    --color-base-075: rgba(21, 27, 30, 0.75);
+    --color-base-050: rgba(21, 27, 30, 0.50);
+    --color-base-025: rgba(21, 27, 30, 0.25);
+    --color-base-015: rgba(21, 27, 30, 0.15);
+    --color-base-010: rgba(21, 27, 30, 0.10);
+    --color-base-005: rgba(21, 27, 30, 0.05);
+    --color-base-000: rgba(21, 27, 30, 0.00);
+
+    // Цвет зависит от скинки
+    --color-hex-01: #2F373B;
+    --color-hex-02: #8244C1;
+    --color-hex-03: #1976D2;
+    --color-hex-04: #43A047;
+    --color-hex-05: #F57C00;
+    --color-hex-06: #D32F2F;
+
+    --color-inverse-hex-01: #E1E2E2;
+    --color-inverse-hex-02: #9966CC;
+    --color-inverse-hex-03: #1E88E5;
+    --color-inverse-hex-04: #4CAF50;
+    --color-inverse-hex-05: #FB8C00;
+    --color-inverse-hex-06: #E53935;
+
+    --shadow-inset-default-025: 0px 3px 9px inset var(--color-default-025);
+  }
+}
+

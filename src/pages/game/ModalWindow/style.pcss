@@ -1,0 +1,34 @@
+.modal {
+  position: fixed;
+  border-radius: 2px;
+  border: solid 1px var(--fixed-color-white-025);
+  background-color: var(--fixed-color-gray-095);
+
+  &_head {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-default-005);
+    border-bottom: solid 1px var(--fixed-color-white-010);
+  }
+
+  &_title {
+    width: 100%;
+    margin: 0 16px;
+
+    &--xl {
+      text-align: left;
+    }
+    &--xr {
+      text-align: right;
+    }
+    &--xc {
+      text-align: center;
+    }
+  }
+
+  &_controls {
+    display: flex;
+  }
+}

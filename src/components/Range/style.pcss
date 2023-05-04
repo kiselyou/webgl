@@ -1,0 +1,25 @@
+.range {
+  width: 100%;
+  height: 18px;
+  display: flex;
+  padding: 0 8px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  line-height: normal;
+  border-radius: 2px;
+  justify-content: space-between;
+  border: solid 1px var(--color-default-025);
+  box-shadow: var(--shadow-inset-default-025);
+
+  &_value {
+    position: absolute;
+    will-change: transform;
+    background-color: var(--color-default-025);
+    transition: width 1000ms var(--default-animation);
+    height: 100%;
+    width: 0;
+    left: 0;
+    top: 0;
+  }
+}

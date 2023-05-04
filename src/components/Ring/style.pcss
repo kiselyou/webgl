@@ -1,0 +1,43 @@
+.ring {
+  position: relative;
+  border-radius: 50%;
+  display: inline-flex;
+  box-sizing: border-box;
+
+  &_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    &--shadow {
+      box-shadow: var(--shadow-inset-default-025);
+    }
+  }
+
+  &_svg {
+    transform: rotateZ(-90deg);
+  }
+
+  &_circle {
+    transition: stroke-dashoffset 1000ms var(--default-animation);
+  }
+
+  &_skin {
+    &--default-025 {
+      & .ring_circle {
+        fill: transparent;
+        stroke: var(--color-default-025);
+      }
+
+      &.ring--bordered {
+        border: solid 1px var(--color-default-015);
+      }
+    }
+  }
+}
