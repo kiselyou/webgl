@@ -1,16 +1,93 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon-es'
+import CannonDebugger from 'cannon-es-debugger'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls'
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer'
 
-import { line } from './shapes'
+import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry'
+import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier'
 
 export default class Playground {
   constructor() {
+    this.funcs = []
+    this.updates = []
+
     this.clock = new THREE.Clock()
     this.scene = new THREE.Scene()
+    this.cannonWorld = new CANNON.World()
+    this.cannonWorld.gravity.set(0, -20, 0)
+
+    // Tweak contact properties.
+    // Contact stiffness - use to make softer/harder contacts
+    this.cannonWorld.defaultContactMaterial.contactEquationStiffness = 1e8
+    // Stabilization time in number of timesteps
+    this.cannonWorld.defaultContactMaterial.contactEquationRelaxation = 10
+
+
+    // const groundShape = new CANNON.Plane()
+    // const groundBody = new CANNON.Body({ mass: 0, shape: groundShape })
+    // groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
+    // groundBody.position.set(0, 0.11, 0)
+    // this.cannonWorld.addBody(groundBody)
+
+    // Sphere 1
+
+    // const boxPlaneShape = new CANNON.Box(new CANNON.Vec3(10, 0.1, 10))
+    // const boxPlaneBody = new CANNON.Body({ mass: 200, type: CANNON.BODY_TYPES.KINEMATIC })
+    // boxPlaneBody.addShape(boxPlaneShape)
+    // boxPlaneBody.position.set(0, 0, 0)
+    // // boxPlaneBody.velocity.set(0, 0, 0)
+    // // boxPlaneBody.linearDamping = 0
+    // this.cannonWorld.addBody(boxPlaneBody)
+
+    // const planeGeometry = new THREE.PlaneGeometry(10, 10)
+    // const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000 })
+    // const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial)
+    // planeMesh.setRotationFromQuaternion(groundBody.quaternion)
+    // planeMesh.position.copy(groundBody.position)
+    // this.scene.add(planeMesh)
+
+
+    // Sphere 1
+    // const sphereShape = new CANNON.Sphere(1)
+    // const body1 = new CANNON.Body({ mass: 5 })
+    // body1.addShape(sphereShape)
+    // body1.position.set(-2.5, 30, 1.2)
+    // // body1.velocity.set(0, 0, 0)
+    // // body1.linearDamping = 0.05
+    // this.cannonWorld.addBody(body1)
+
+    // const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
+    // const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFF00 })
+    // const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial)
+    // sphereMesh.position.copy(body1.position)
+    // this.scene.add(sphereMesh)
+    //
+    // this.updates.push(() => {
+    //   sphereMesh.position.copy(body1.position)
+    // })
+
+    // Sphere 1
+    const v = new CANNON.Vec3(0.5, 1.5, 0.5)
+    const boxShape = new CANNON.Box(v)
+    const body2 = new CANNON.Body({ mass: 2 })
+    body2.addShape(boxShape)
+    body2.position.set(-2.5, 10, 0)
+    // body2.velocity.set(0, 0, 0)
+    // body2.linearDamping = 0.05
+    this.cannonWorld.addBody(body2)
+
+    // Sphere 1
+    // const cylinderShape = new CANNON.Cylinder(0.5, 1.5, 1, 10)
+    // const body3 = new CANNON.Body({ mass: 19 })
+    // body3.addShape(cylinderShape)
+    // body3.position.set(-2.5, 25, 1.2)
+    // // body3.velocity.set(0, 0, 0)
+    // // body3.linearDamping = 0.05
+    // this.cannonWorld.addBody(body3)
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 5000)
-    this.camera.position.set(0, 6, 24)
+    this.camera.position.set(0, 6, 50)
 
     this.rendererWebGL = new THREE.WebGLRenderer({ canvas: document.createElement('canvas'), antialias: true })
     this.rendererWebGL.outputColorSpace = THREE.SRGBColorSpace
@@ -23,12 +100,13 @@ export default class Playground {
     this.controls.dampingFactor = 0.08
     this.controls.minDistance = 5
     this.controls.maxDistance = 50
+    this.funcs.push(() => this.controls.dispose())
 
     this.ambientLightTop = new THREE.AmbientLight(0x60caeb, .8)
     this.ambientLightTop.castShadow = true
     this.ambientLightTop.position.set(500, -500, 100)
     this.scene.add(this.ambientLightTop)
-    //
+
     this.ambientLightBottom = new THREE.AmbientLight(0xFFFFFF, 0.4)
     this.ambientLightBottom.castShadow = true
     this.ambientLightBottom.position.set(-500, 500, -100)
@@ -55,15 +133,11 @@ export default class Playground {
     this.axisHelper.position.setY(0.01)
 
     this.gridHelper = new THREE.GridHelper(80, 20, 0xFFFFFF)
+  }
 
-    this.scene.add(line(new THREE.Vector3(1, 0, 1)))
-    // this.scene.add(line(new THREE.Vector3(1, 0, 2)))
-    // this.scene.add(line(new THREE.Vector3(1, 0, 3)))
-    //
-    // this.scene.add(line(new THREE.Vector3(2, 0, 1)))
-    // this.scene.add(line(new THREE.Vector3(2, 0, 2)))
-    // this.scene.add(line(new THREE.Vector3(2, 0, 3)))
-
+  setPhysicWorldDebugger() {
+    const cannonWorldDebugger = new CannonDebugger(this.scene, this.cannonWorld, {})
+    this.updates.push(() => cannonWorldDebugger.update())
   }
 
   /**
@@ -108,6 +182,7 @@ export default class Playground {
     this.rendererWebGL.setSize(window.innerWidth, window.innerHeight)
     this.rendererWebGL.domElement.classList.add(className)
     container.appendChild(this.rendererWebGL.domElement)
+    return this
   }
 
   /**
@@ -138,6 +213,7 @@ export default class Playground {
    * @returns {[]}
    */
   intersections(objects) {
+    this.camera.updateMatrixWorld()
     this.raycaster.setFromCamera(this.pointer, this.camera)
     return this.raycaster.intersectObjects(objects, false)
   }
@@ -147,19 +223,34 @@ export default class Playground {
    * @returns {Playground}
    */
   animate(callback) {
+    let requestID = null
     const animate = () => {
-      requestAnimationFrame(animate)
-      const time = this.clock.getDelta()
+      requestID = requestAnimationFrame(animate)
+      const dt = this.clock.getDelta()
 
-      if (time) {
-        callback(time)
+      if (dt) {
+        callback(dt)
       }
 
       this.controls.update()
+      this.cannonWorld.step(dt)
+
+      for (let update of this.updates) {
+        update(dt)
+      }
+
       this.rendererWebGL.render(this.scene, this.camera)
       this.rendererLabel.render(this.scene, this.camera)
     }
     animate()
+    this.funcs.push(() => cancelAnimationFrame(requestID))
+    return this
+  }
+
+  destroy() {
+    for (let func of this.funcs) {
+      func()
+    }
     return this
   }
 }

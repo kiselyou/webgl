@@ -22,6 +22,7 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   devServer: {
+    historyApiFallback: true,
     static: path.resolve(__dirname, 'dist'),
     client: {
       logging: 'none',
@@ -121,6 +122,10 @@ module.exports = {
         {
           from: 'public/assets/textures',
           to: 'assets/textures'
+        },
+        {
+          from: 'public/assets/models',
+          to: 'assets/models'
         }
       ]
     }),
