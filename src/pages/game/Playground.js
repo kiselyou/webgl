@@ -46,13 +46,13 @@ export default class Playground {
 
 
     // Sphere 1
-    const sphereShape = new CANNON.Sphere(1)
-    const body1 = new CANNON.Body({ mass: 5 })
-    body1.addShape(sphereShape)
-    body1.position.set(0.5, 30, 1.2)
-    // body1.velocity.set(0, 0, 0)
-    // body1.linearDamping = 0.05
-    this.cannonWorld.addBody(body1)
+    // const sphereShape = new CANNON.Sphere(1)
+    // const body1 = new CANNON.Body({ mass: 5 })
+    // body1.addShape(sphereShape)
+    // body1.position.set(0.5, 30, 1.2)
+    // // body1.velocity.set(0, 0, 0)
+    // // body1.linearDamping = 0.05
+    // this.cannonWorld.addBody(body1)
 
     // const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
     // const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFF00 })
@@ -65,23 +65,23 @@ export default class Playground {
     // })
 
     // Sphere 1
-    const v = new CANNON.Vec3(0.5, 1.5, 0.5)
-    const boxShape = new CANNON.Box(v)
-    const body2 = new CANNON.Body({ mass: 2 })
-    body2.addShape(boxShape)
-    body2.position.set(-0.5, 10, 0)
-    // body2.velocity.set(0, 0, 0)
-    // body2.linearDamping = 0.05
-    this.cannonWorld.addBody(body2)
-
-    // Sphere 1
-    const cylinderShape = new CANNON.Cylinder(0.5, 1.5, 1, 10)
-    const body3 = new CANNON.Body({ mass: 19 })
-    body3.addShape(cylinderShape)
-    body3.position.set(0.5, 25, 1.2)
-    // body3.velocity.set(0, 0, 0)
-    // body3.linearDamping = 0.05
-    this.cannonWorld.addBody(body3)
+    // const v = new CANNON.Vec3(0.5, 1.5, 0.5)
+    // const boxShape = new CANNON.Box(v)
+    // const body2 = new CANNON.Body({ mass: 2 })
+    // body2.addShape(boxShape)
+    // body2.position.set(-0.5, 10, 0)
+    // // body2.velocity.set(0, 0, 0)
+    // // body2.linearDamping = 0.05
+    // this.cannonWorld.addBody(body2)
+    //
+    // // Sphere 1
+    // const cylinderShape = new CANNON.Cylinder(0.5, 1.5, 1, 10)
+    // const body3 = new CANNON.Body({ mass: 19 })
+    // body3.addShape(cylinderShape)
+    // body3.position.set(0.5, 25, 1.2)
+    // // body3.velocity.set(0, 0, 0)
+    // // body3.linearDamping = 0.05
+    // this.cannonWorld.addBody(body3)
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 5000)
     this.camera.position.set(0, 6, 50)

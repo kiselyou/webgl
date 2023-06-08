@@ -50,20 +50,23 @@ export default class PageFire extends React.Component {
     let groupID, path;
 
     const loader = new GLTFLoader()
-    loader.load('assets/models/plane2.gltf', (gltf) => {
+    loader.load('assets/models/map.gltf', (gltf) => {
       const mesh = gltf.scene.getObjectByName('Cube') || gltf.scene.getObjectByName('Plane')
-      console.log(mesh, '++')
-      const zone = Pathfinding.createZone(mesh.geometry)
+
+      const path = gltf.scene.getObjectByName('Path')
+      console.log(mesh, '++', gltf.scene.getObjectByName('Path'), path.geometry)
+      // const zone = Pathfinding.createZone(mesh.geometry)
+      const zone = Pathfinding.createZone(path.geometry)
       this.pathfinder.setZoneData( ZONE, zone )
 
-      const { shape, offset, orientation } = threeToCannon(mesh)
-
-
-      const body = new CANNON.Body({ mass: 100, type: CANNON.BODY_TYPES.KINEMATIC })
-      body.addShape(shape, offset, orientation)
-      // body.position.set(0, 0.1, 0)
-      console.log(shape, body)
-      this.playground.cannonWorld.addBody(body)
+      // const { shape, offset, orientation } = threeToCannon(mesh)
+      //
+      //
+      // const body = new CANNON.Body({ mass: 100, type: CANNON.BODY_TYPES.KINEMATIC })
+      // body.addShape(shape, offset, orientation)
+      // // body.position.set(0, 0.1, 0)
+      // console.log(shape, body)
+      // this.playground.cannonWorld.addBody(body)
 
       // NavPath helper
       const navWireframe = new THREE.Mesh(mesh.geometry, new THREE.MeshBasicMaterial({
