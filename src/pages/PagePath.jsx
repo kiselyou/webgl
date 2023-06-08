@@ -6,8 +6,8 @@ import Page from '@pages/Page'
 import Playground from '@pages/game/Playground'
 import { Pathfinding, PathfindingHelper } from 'three-pathfinding'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { ss } from '@lib/cannon'
 import * as CANNON from 'cannon-es'
+import { threeToCannon } from 'three-to-cannon'
 const SPEED = 5
 
 export default class PageFire extends React.Component {
@@ -56,11 +56,12 @@ export default class PageFire extends React.Component {
       const zone = Pathfinding.createZone(mesh.geometry)
       this.pathfinder.setZoneData( ZONE, zone )
 
-      const shape = ss(mesh)
+      const { shape, offset, orientation } = threeToCannon(mesh)
 
 
-      const body = new CANNON.Body({ mass: 100, shape, type: CANNON.BODY_TYPES.STATIC })
-      body.position.set(0, 0.1, 0)
+      const body = new CANNON.Body({ mass: 100, type: CANNON.BODY_TYPES.KINEMATIC })
+      body.addShape(shape, offset, orientation)
+      // body.position.set(0, 0.1, 0)
       console.log(shape, body)
       this.playground.cannonWorld.addBody(body)
 
